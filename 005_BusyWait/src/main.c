@@ -38,14 +38,16 @@ int main(int argc, char **argv)
 
     bcm2835_gpio_fsel(RPI_BPLUS_GPIO_J8_07, BCM2835_GPIO_FSEL_OUTP);
 
-    struct timespec delay = {0, 10 * 1000};
+    int n = 10;
 
     for (ever)
     {
-        bcm2835_gpio_set(RPI_BPLUS_GPIO_J8_07);
-        nanosleep(&delay, NULL);
-        bcm2835_gpio_clr(RPI_BPLUS_GPIO_J8_07);
-        nanosleep(&delay, NULL);
+        for (volatile int i = 0; i < n; i++)
+            ;
+        bcm2835_gpio_write(RPI_BPLUS_GPIO_J8_07, HIGH);
+        for (volatile int i = 0; i < n; i++)
+            ;
+        bcm2835_gpio_write(RPI_BPLUS_GPIO_J8_07, LOW);
     }
 
     bcm2835_close();
