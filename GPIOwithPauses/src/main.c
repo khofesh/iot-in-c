@@ -1,3 +1,14 @@
+/**
+ * the delay time relates to the average pulse length for Pi 4:
+ * pulse length = delay + 68
+ *
+ * thi means, if you want to set a delay less then 70us or 90us, don't use
+ * nanosleep.
+ *
+ * void bcm2835_delayMicroseconds(time)
+ * uses a busy wait loop for times shorter than 450µs and a system delay
+ * like usleep or nanosleep for longer periods.
+ */
 #define _DEFAULT_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
