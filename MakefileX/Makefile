@@ -1,9 +1,10 @@
 CC = gcc
-CFLAGS = -Iinclude -Wall -g -fdiagnostics-color=always -std=c99 -fsanitize=address
+CFLAGS = -Iinclude -Wall -g -fdiagnostics-color=always -std=c17 -fsanitize=address
+BCM2835 = -l bcm2835
 SRC = src
 OBJ = obj
 BIN = bin
-LDLIBS = -fsanitize=address
+LDLIBS = -fsanitize=address 
 
 # List all the source files
 SOURCES = $(wildcard $(SRC)/*.c)
@@ -17,11 +18,11 @@ all: $(BIN)/$(EXECUTABLE)
 
 # Compile all the object files and link them to create the executable
 $(BIN)/$(EXECUTABLE): $(OBJECTS)
-	$(CC) $(OBJECTS) ${LDLIBS} -o $@
+	$(CC) $(OBJECTS) $(BCM2835) ${LDLIBS} -o $@
 
 # Compile each source file into an object file
-$(OBJECTS): $(OBJ)/%.o : $(SRC)/%.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+$(OBJECTS): $(OBJ)/%.o : $(SRC)/%.c
+	$(CC) $(CFLAGS) $(BCM2835) -c $< -o $@
 
 # Clean up the object files and the executable
 clean:
