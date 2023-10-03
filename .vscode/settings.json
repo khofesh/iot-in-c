@@ -66,7 +66,8 @@
       "future": "cpp",
       "charconv": "cpp",
       "printk.h": "c",
-      "init.h": "c"
+      "init.h": "c",
+      "bcm2835.h": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
   }
